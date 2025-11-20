@@ -1,72 +1,71 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <!-- Konten utama (scroll, kategori, rv, dll) -->
-    <LinearLayout
-        android:id="@+id/contentLayout"
-        android:orientation="vertical"
-        android:padding="16dp"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav">
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Judul -->
-        <TextView
-            android:id="@+id/txtResep"
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp"
+            android:paddingHorizontal="0dp">
+
+            <TextView
+            android:id="@+id/textViewJudul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RESEP"
+            android:text="RESEP MASAKAN"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="12dp" />
 
-        <!-- Kategori -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_category_food" />
 
-            <LinearLayout
-                android:id="@+id/layoutKategori"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
-        </HorizontalScrollView>
+                android:text="REKOMENDASI"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:paddingStart="16dp" />
 
-        <!-- Rekomendasi -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="REKOMENDASI"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMakanan"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <!-- Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="#BEBEBE"
-        app:itemIconTint="@color/black"
-        app:itemRippleColor="@android:color/darker_gray"
-        app:itemActiveIndicatorStyle="@null"
-        app:menu="@menu/bottom_menu"
-        app:itemIconSize="30dp"
-        app:labelVisibilityMode="unlabeled"
-        app:itemHorizontalTranslationEnabled="false" />
-
-</RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewRekomendasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:paddingBottom="16dp"
+                android:paddingHorizontal="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_food" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
