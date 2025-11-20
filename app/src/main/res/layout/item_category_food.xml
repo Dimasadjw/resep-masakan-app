@@ -11,6 +11,7 @@
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -39,5 +40,6 @@
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Chinese Food" />
+
 
 </LinearLayout>
