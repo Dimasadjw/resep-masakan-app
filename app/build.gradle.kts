@@ -36,6 +36,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.6")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
