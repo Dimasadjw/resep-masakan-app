@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- Tombol Back -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/ic_arrow_back"
+        android:tint="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Judul RESEP -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESEP"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- EditText Nama Resep -->
+    <EditText
+        android:id="@+id/etNamaResep"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:hint="Nama Resep"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#9E9E9E"
+        android:background="@drawable/bg_box"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        android:layout_marginTop="45dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- EditText Alat dan Bahan -->
+    <EditText
+        android:id="@+id/etAlatBahan"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:gravity="top|start"
+        android:hint="Alat dan Bahan"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#9E9E9E"
+        android:background="@drawable/bg_box"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/etNamaResep"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- EditText Cara Masak -->
+    <EditText
+        android:id="@+id/etCaraMasak"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:gravity="top|start"
+        android:hint="Cara Masak"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#9E9E9E"
+        android:background="@drawable/bg_box"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/etAlatBahan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Tombol Tambah -->
+    <Button
+        android:id="@+id/btnTambah"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="Tambah"
+        android:textColor="#000000"
+        android:background="@drawable/bg_button"
+        app:layout_constraintTop_toBottomOf="@id/etCaraMasak"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
