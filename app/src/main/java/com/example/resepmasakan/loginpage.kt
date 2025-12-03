@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login) // pastikan sesuai nama xml kamu
+        setContentView(R.layout.loginpage) // pastikan sesuai nama xml kamu
 
         // Inisialisasi View
         etEmail = findViewById(R.id.et_email)
