@@ -1,11 +1,14 @@
 package com.example.masakyuk
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.resepmasakan.MainActivity
+import com.example.resepmasakan.R
 
 class LoginActivity : AppCompatActivity() {
 
@@ -17,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login) // pastikan sesuai nama xml kamu
+        setContentView(R.layout.loginpage)  // sesuai layout kamu
 
         // Inisialisasi View
         etEmail = findViewById(R.id.et_email)
@@ -26,12 +29,10 @@ class LoginActivity : AppCompatActivity() {
         tvLoginHeading = findViewById(R.id.tv_login_heading)
         tvWelcome = findViewById(R.id.tv_welcome)
 
-        // Aksi tombol login
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Validasi sederhana
             if (email.isEmpty()) {
                 etEmail.error = "Email tidak boleh kosong"
                 return@setOnClickListener
@@ -42,18 +43,14 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Contoh validasi sukses
-            if (email == "admin@gmail.com" && password == "123456") {
-                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
+            // Login Berhasil
+            Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
 
-                // Contoh pindah ke activity lain
-                // val intent = Intent(this, HomeActivity::class.java)
-                // startActivity(intent)
-                // finish()
-
-            } else {
-                Toast.makeText(this, "Email atau Password salah", Toast.LENGTH_SHORT).show()
-            }
+            // Kirim email ke MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("user_email", email)
+            startActivity(intent)
+            finish()
         }
     }
 }
