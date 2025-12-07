@@ -1,4 +1,4 @@
-package com.example.masakyuk
+package com.example.resepmasakan.Activities
 
 import android.content.Intent
 import android.os.Bundle

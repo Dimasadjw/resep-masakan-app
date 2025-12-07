@@ -8,18 +8,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.resepmasakan.R
-import com.example.resepmasakan.Models.Category
+import com.example.resepmasakan.Models.Kategori // Disesuaikan menjadi Kategori
 
 class KategoriAdapter(
-    private var dataList: List<Category>,
-    private val onItemClick: (Category) -> Unit
+    // Disesuaikan menjadi Kategori
+    private var dataList: List<Kategori>,
+    private val onItemClick: (Kategori) -> Unit
 ) : RecyclerView.Adapter<KategoriAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryIcon: ImageView = itemView.findViewById(R.id.imageViewKategori)
         val categoryName: TextView = itemView.findViewById(R.id.textViewKategori)
 
-        fun bind(category: Category) {
+        fun bind(category: Kategori) { // Disesuaikan menjadi Kategori
             categoryName.text = category.nama
             categoryIcon.setImageResource(category.idIcon)
 
@@ -44,7 +45,7 @@ class KategoriAdapter(
         return dataList.size
     }
 
-    fun submitList(newList: List<Category>) {
+    fun submitList(newList: List<Kategori>) { // Disesuaikan menjadi Kategori
         dataList = newList
         notifyDataSetChanged()
     }

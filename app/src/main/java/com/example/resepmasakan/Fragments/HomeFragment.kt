@@ -8,88 +8,84 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+// Impor Model yang Benar: Kategori dan Resep
+import com.example.resepmasakan.Models.Kategori
+import com.example.resepmasakan.Models.Resep
 import com.example.resepmasakan.R
 import com.example.resepmasakan.adapters.KategoriAdapter
 import com.example.resepmasakan.adapters.ResepAdapter
 import com.example.resepmasakan.data.RecipeRepository
 
 // HomeFragment adalah sebuah "layar" atau bagian dari layar utama.
-// Tugasnya adalah menampilkan daftar kategori dan daftar rekomendasi resep.
 class HomeFragment : Fragment() {
 
     // Kita akan gunakan dua RecyclerView: satu untuk kategori, satu untuk resep.
-    // Kita deklarasikan di sini agar bisa diakses di seluruh bagian class ini.
     private lateinit var rvKategori: RecyclerView
     private lateinit var rvResep: RecyclerView
 
-    // onCreateView adalah fungsi yang pertama kali dipanggil untuk membuat tampilan.
-    // Bayangkan ini seperti menyiapkan kanvas kosong.
+    // onCreateView: Menyiapkan tampilan (kanvas) dari XML
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // "inflater" adalah alat untuk mengubah file layout XML (activity_home.xml)
-        // menjadi sebuah "View" atau tampilan nyata yang bisa dilihat.
+        // Mengubah XML (activity_home.xml) menjadi View nyata
         val tampilan = inflater.inflate(R.layout.activity_home, container, false)
-
-        // Kita kembalikan tampilan yang sudah jadi ini agar bisa ditampilkan di layar.
         return tampilan
     }
 
-    // onViewCreated dipanggil SETELAH tampilan dari onCreateView selesai dibuat.
-    // Sekarang kita punya "kanvas" yang sudah siap untuk kita "lukis" atau isi.
+    // onViewCreated: Mengisi data ke tampilan yang sudah siap
     override fun onViewCreated(tampilan: View, savedInstanceState: Bundle?) {
         super.onViewCreated(tampilan, savedInstanceState)
 
-        // Langkah 1: Kenalan dulu sama RecyclerView yang ada di file XML.
-        // Kita cari mereka berdasarkan ID yang sudah kita buat di layout.
+        // Langkah 1: Hubungkan dengan RecyclerView di XML
         rvKategori = tampilan.findViewById(R.id.recyclerViewHorizontal)
         rvResep = tampilan.findViewById(R.id.recyclerViewRekomendasi)
 
-        // Langkah 2: Siapkan data yang mau ditampilkan.
-        // Kita minta data dari "gudang data" kita, yaitu RecipeRepository.
-        val dataUntukKategori = RecipeRepository.getCategoryData()
-        val dataUntukResep = RecipeRepository.getRecommendationData()
+        // Langkah 2: Siapkan data dari Repository
+        val dataUntukKategori = RecipeRepository.getCategoryData() // List<Kategori>
+        val dataUntukResep = RecipeRepository.getRecommendationData() // List<Resep>
 
-        // Langkah 3: Tampilkan data kategori ke RecyclerView horizontal.
+        // Langkah 3 & 4: Tampilkan data
         tampilkanKategori(dataUntukKategori)
-
-        // Langkah 4: Tampilkan data resep ke RecyclerView vertikal.
         tampilkanResep(dataUntukResep)
     }
 
-    // --- FUNGSI-FUNGSI BANTU AGAR KODE LEBIH RAPI ---
+    // --- FUNGSI-FUNGSI BANTU ---
 
-    // Fungsi ini khusus untuk mengatur dan menampilkan daftar KATEGORI.
-    private fun tampilkanKategori(dataKategori: List<com.example.resepmasakan.Models.Category>) {
-        // Buat Adapter untuk kategori.
-        // Beri tahu adapter data mana yang harus dipakai, dan apa yang harus dilakukan saat item diklik.
+    // Fungsi untuk mengatur dan menampilkan daftar KATEGORI.
+    // Menggunakan tipe List<Kategori>
+    private fun tampilkanKategori(dataKategori: List<Kategori>) {
+
+        // Buat Adapter Kategori dengan aksi klik
         val adapterUntukKategori = KategoriAdapter(dataKategori) { kategori ->
-            // Untuk sementara, kita tampilkan pesan singkat (Toast) saja saat kategori diklik.
-            Toast.makeText(requireContext(), "Ini Kategori: ${kategori.nama}", Toast.LENGTH_SHORT).show()
+            // AKSI KLIK: Nanti diganti dengan kode navigasi ke CategoryDetailFragment
+            Toast.makeText(requireContext(), "Menuju Kategori: ${kategori.nama}", Toast.LENGTH_SHORT).show()
+            // TODO: Gunakan NavController untuk menavigasi dan mengirim kategori.id
         }
 
         // Atur RecyclerView agar menampilkan item secara mendatar (HORIZONTAL).
         rvKategori.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        // Terakhir, pasang adapter yang sudah siap ini ke RecyclerView kategori.
+        // Pasang adapter ke RecyclerView
         rvKategori.adapter = adapterUntukKategori
     }
 
-    // Fungsi ini khusus untuk mengatur dan menampilkan daftar RESEP.
-    private fun tampilkanResep(dataResep: List<com.example.resepmasakan.Models.Recipe>) {
-        // Buat Adapter untuk resep.
-        // Beri tahu adapter data mana yang harus dipakai, dan apa yang harus dilakukan saat item diklik.
+    // Fungsi untuk mengatur dan menampilkan daftar RESEP.
+    // Menggunakan tipe List<Resep>
+    private fun tampilkanResep(dataResep: List<Resep>) {
+
+        // Buat Adapter Resep dengan aksi klik
         val adapterUntukResep = ResepAdapter(dataResep) { resep ->
-            // Untuk sementara, kita tampilkan pesan singkat (Toast) saja saat resep diklik.
-            Toast.makeText(requireContext(), "Ini Resep: ${resep.nama}", Toast.LENGTH_SHORT).show()
-            // Nanti, kode untuk pindah halaman (navigasi) akan ditaruh di sini.
+            // AKSI KLIK: Nanti diganti dengan kode navigasi ke Detail Resep
+            Toast.makeText(requireContext(), "Membuka Resep: ${resep.nama}", Toast.LENGTH_SHORT).show()
+            // TODO: Gunakan NavController untuk menavigasi ke Detail Resep sambil mengirim resep.id
         }
 
         // Atur RecyclerView agar menampilkan item secara menurun (VERTIKAL).
+        // NestedScrollingEnabled=false di XML, jadi kita gunakan LayoutManager standar.
         rvResep.layoutManager = LinearLayoutManager(requireContext())
 
-        // Terakhir, pasang adapter yang sudah siap ini ke RecyclerView resep.
+        // Pasang adapter ke RecyclerView
         rvResep.adapter = adapterUntukResep
     }
 }
