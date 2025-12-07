@@ -20,14 +20,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.loginpage)  // sesuai layout kamu
+        setContentView(R.layout.loginpage) // sesuai layout kamu
 
         // Inisialisasi View
-        etEmail = findViewById(R.id.et_email)
-        etPassword = findViewById(R.id.et_password)
-        btnLogin = findViewById(R.id.btn_login)
-        tvLoginHeading = findViewById(R.id.tv_login_heading)
-        tvWelcome = findViewById(R.id.tv_welcome)
+        etEmail = findViewById(R.id.et_email) // Pastikan ID ini benar di layout loginpage.xml
+        etPassword = findViewById(R.id.et_password) // Pastikan ID ini benar
+        btnLogin = findViewById(R.id.btn_login) // Pastikan ID ini benar
+        tvLoginHeading = findViewById(R.id.tv_login_heading) // Pastikan ID ini benar
+        tvWelcome = findViewById(R.id.tv_welcome) // Pastikan ID ini benar
 
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
@@ -46,9 +46,9 @@ class LoginActivity : AppCompatActivity() {
             // Login Berhasil
             Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
 
-            // Kirim email ke MainActivity
+            // Kirim email ke MainActivity melalui Intent
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("user_email", email)
+            intent.putExtra("user_email", email) // Kunci yang digunakan: "user_email"
             startActivity(intent)
             finish()
         }
