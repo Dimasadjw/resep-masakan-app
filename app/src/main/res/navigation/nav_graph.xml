@@ -21,6 +21,12 @@
         android:id="@+id/nav_profile"
         android:name="com.example.resepmasakan.Fragments.ProfileFragment"
         android:label="@string/Profile"
-        tools:layout="@layout/activity_profile" />
+        tools:layout="@layout/activity_profile">
+
+        <argument
+            android:name="emailPengguna"
+            app:argType="string"
+            android:defaultValue="user@example.com" />
+    </fragment>
 
 </navigation>
