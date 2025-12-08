@@ -19,7 +19,8 @@ object RecipeRepository {
     }
 
     // DATA RESEP DENGAN DETAIL INSTRUKSI BARU
-    private val allRecipes: List<Resep> = listOf(
+    // PENTING: Diubah menjadi MutableList agar status isBookmarked bisa diubah saat runtime.
+    private val allRecipes: MutableList<Resep> = mutableListOf(
         Resep(
             id = 101, nama = "Nasi Goreng Spesial", idGambar = R.drawable.img_resep_nasi_goreng,
             infoDurasiPorsi = "30 Menit | 4 Porsi",
@@ -42,7 +43,7 @@ object RecipeRepository {
                 "Tambahkan kecap manis, garam, dan merica bubuk. Aduk cepat dan ratakan menggunakan spatula agar warna nasi merata sempurna (proses ini penting agar nasi tidak menggumpal).",
                 "Koreksi rasa. Jika sudah pas, matikan api.",
                 "Sajikan nasi goreng selagi hangat. Taburi dengan bawang goreng, irisan timun, dan tomat sebagai pelengkap."
-            ), rating = 4.7f, categoryId = 1
+            ), rating = 4.7f, categoryId = 1, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 109, nama = "Mie Goreng Jawa Pedas", idGambar = R.drawable.img_resep_mie_goreng,
@@ -63,7 +64,7 @@ object RecipeRepository {
                 "Masukkan mie yang sudah ditiriskan. Tambahkan kecap manis, garam, gula, dan lada. Aduk cepat dengan api besar.",
                 "Masak selama 2-3 menit hingga bumbu meresap sempurna.",
                 "Sajikan mie goreng dengan telur mata sapi dan acar timun wortel."
-            ), rating = 4.5f, categoryId = 1
+            ), rating = 4.5f, categoryId = 1, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 118, nama = "Lontong Sayur Betawi", idGambar = R.drawable.img_resep_lontong_sayur,
@@ -84,7 +85,7 @@ object RecipeRepository {
                 "Tuang santan, aduk perlahan-lahan (jangan sampai santan pecah). Masak hingga mendidih dan labu matang sepenuhnya.",
                 "Tambahkan garam dan gula secukupnya. Koreksi rasa.",
                 "Sajikan kuah sayur labu panas di atas potongan lontong. Lengkapi dengan telur rebus dan taburan kerupuk."
-            ), rating = 4.4f, categoryId = 1
+            ), rating = 4.4f, categoryId = 1, isBookmarked = false // Ditambahkan
         ),
 
         Resep(
@@ -106,7 +107,7 @@ object RecipeRepository {
                 "Kecilkan api ke level sangat kecil. Masak terus (proses merandang) selama minimal 2-3 jam.",
                 "Aduk sesekali. Masak hingga santan mengering, bumbu meresap sempurna, dan rendang berwarna cokelat kehitaman.",
                 "Koreksi rasa. Rendang siap disajikan."
-            ), rating = 4.9f, categoryId = 2
+            ), rating = 4.9f, categoryId = 2, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 110, nama = "Tongseng Sapi Khas Solo", idGambar = R.drawable.img_resep_tongseng,
@@ -128,7 +129,7 @@ object RecipeRepository {
                 "Tambahkan kecap manis, garam, dan lada. Koreksi rasa.",
                 "Masukkan kol dan tomat menjelang diangkat (masak sebentar saja agar sayuran tetap renyah).",
                 "Sajikan tongseng sapi selagi panas dengan taburan bawang goreng."
-            ), rating = 4.3f, categoryId = 2
+            ), rating = 4.3f, categoryId = 2, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 116, nama = "Sate Kambing Bumbu Kecap", idGambar = R.drawable.img_resep_sate_kambing,
@@ -146,7 +147,7 @@ object RecipeRepository {
                 "Bakar sate di atas panggangan sambil terus dibolak-balik.",
                 "Selama proses membakar, olesi sate dengan bumbu olesan berulang kali hingga matang merata dan bumbu meresap.",
                 "Sajikan sate kambing hangat bersama sambal kecap dan acar mentimun."
-            ), rating = 4.6f, categoryId = 2
+            ), rating = 4.6f, categoryId = 2, isBookmarked = false // Ditambahkan
         ),
 
         Resep(
@@ -167,7 +168,7 @@ object RecipeRepository {
                 "Masukkan tumisan bumbu ke dalam air kaldu, masak hingga mendidih kembali.",
                 "Tambahkan garam dan gula. Koreksi rasa. Goreng ayam yang sudah direbus lalu suwir-suwir.",
                 "Sajikan soto dengan menata mie soun, tauge, dan suwiran ayam di mangkuk. Siram dengan kuah panas. Taburi daun seledri dan bawang goreng."
-            ), rating = 4.5f, categoryId = 3
+            ), rating = 4.5f, categoryId = 3, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 113, nama = "Ayam Goreng Lengkuas", idGambar = R.drawable.img_resep_ayam_lengkuas,
@@ -186,7 +187,7 @@ object RecipeRepository {
                 "Goreng ayam dalam minyak panas hingga berwarna kuning kecoklatan. Angkat.",
                 "Goreng sisa bumbu lengkuas dalam minyak sisa penggorengan hingga kering dan renyah (serundeng lengkuas).",
                 "Sajikan ayam goreng dengan taburan serundeng lengkuas yang garing."
-            ), rating = 4.8f, categoryId = 3
+            ), rating = 4.8f, categoryId = 3, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 119, nama = "Ayam Bakar Bumbu Rujak", idGambar = R.drawable.img_resep_ayam_rujak,
@@ -204,7 +205,7 @@ object RecipeRepository {
                 "Masak dengan api sedang hingga air menyusut, bumbu mengental (menjadi bumbu olesan), dan ayam matang.",
                 "Angkat ayam. Sisihkan bumbu kental yang tersisa.",
                 "Bakar ayam di atas panggangan sambil diolesi sisa bumbu berulang kali hingga ayam berwarna kecoklatan dan siap disajikan."
-            ), rating = 4.5f, categoryId = 3
+            ), rating = 4.5f, categoryId = 3, isBookmarked = false // Ditambahkan
         ),
 
         Resep(
@@ -224,7 +225,7 @@ object RecipeRepository {
                 "Masukkan cumi. Masak dengan api besar **selama 2-3 menit saja**.",
                 "Koreksi rasa. Segera angkat cumi setelah matang (memasak terlalu lama akan membuat cumi alot).",
                 "Sajikan hangat dengan nasi."
-            ), rating = 4.6f, categoryId = 4
+            ), rating = 4.6f, categoryId = 4, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 114, nama = "Ikan Bakar Bumbu Kuning", idGambar = R.drawable.img_resep_ikan_bakar,
@@ -242,7 +243,7 @@ object RecipeRepository {
                 "Lumuri seluruh permukaan ikan dengan bumbu hingga merata, diamkan 15 menit agar meresap.",
                 "Bakar ikan di atas panggangan/teflon. Bolak-balik sambil terus diolesi sisa bumbu hingga matang merata dan harum.",
                 "Sajikan ikan bakar dengan sambal dabu-dabu atau sambal terasi dan lalapan."
-            ), rating = 4.7f, categoryId = 4
+            ), rating = 4.7f, categoryId = 4, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 120, nama = "Udang Goreng Saus Mentega", idGambar = R.drawable.img_resep_udang_mentega,
@@ -262,7 +263,7 @@ object RecipeRepository {
                 "Tambahkan kecap inggris dan saus tiram. Aduk cepat.",
                 "Tambahkan sedikit air jika terlalu kering, garam, dan lada. Masak hingga saus mengental dan udang matang.",
                 "Koreksi rasa dan segera sajikan hangat."
-            ), rating = 4.4f, categoryId = 4
+            ), rating = 4.4f, categoryId = 4, isBookmarked = false // Ditambahkan
         ),
 
         Resep(
@@ -285,7 +286,7 @@ object RecipeRepository {
                 "Tambahkan garam, gula, dan lada. Aduk cepat.",
                 "Tuang larutan maizena untuk mengentalkan kuah. Masak hingga semua sayuran matang tetapi masih renyah (sekitar 2 menit).",
                 "Koreksi rasa, sajikan."
-            ), rating = 3.9f, categoryId = 5
+            ), rating = 3.9f, categoryId = 5, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 111, nama = "Sayur Asem Jakarta", idGambar = R.drawable.img_resep_sayur_asem,
@@ -305,7 +306,7 @@ object RecipeRepository {
                 "Masukkan sayuran lunak (kacang panjang, daun melinjo). Tambahkan garam dan gula.",
                 "Masak hingga semua sayuran matang. Koreksi rasa (rasa harus segar asam, manis, dan sedikit pedas).",
                 "Sajikan sayur asem hangat dengan ikan asin dan sambal terasi."
-            ), rating = 4.1f, categoryId = 5
+            ), rating = 4.1f, categoryId = 5, isBookmarked = false // Ditambahkan
         ),
         Resep(
             id = 115, nama = "Tumis Kangkung Terasi", idGambar = R.drawable.img_resep_kangkung,
@@ -325,7 +326,7 @@ object RecipeRepository {
                 "Masukkan kangkung. Aduk cepat dengan api besar.",
                 "Tambahkan garam, gula, dan sedikit air. Masak hanya 1-2 menit hingga kangkung layu tetapi masih renyah dan berwarna hijau cerah.",
                 "Koreksi rasa dan segera angkat. Sajikan agar kangkung tidak layu."
-            ), rating = 3.8f, categoryId = 5
+            ), rating = 3.8f, categoryId = 5, isBookmarked = false // Ditambahkan
         )
     )
 
@@ -346,10 +347,22 @@ object RecipeRepository {
 
     fun getFavoriteResep(): List<Resep> {
         // Mengambil 5 resep dengan rating tinggi (misalnya >= 4.7)
+        // Note: Anda mungkin ingin memfilter berdasarkan 'isBookmarked == true' untuk Favorite sejati.
         return allRecipes.filter { it.rating >= 4.7f }.take(5)
     }
 
     fun findRecipeById(id: Int): Resep? {
         return allRecipes.find { it.id == id }
+    }
+
+    // --- FUNGSI BARU WAJIB UNTUK BOOKMARKING ---
+    /**
+     * Mengupdate status isBookmarked pada objek Resep di dalam Repository.
+     * Ini menyelesaikan error 'Unresolved reference' dari RecipeDetailActivity.
+     */
+    fun updateRecipeBookmarkStatus(recipeId: Int, newStatus: Boolean) {
+        val recipe = allRecipes.find { it.id == recipeId }
+        // Mengubah status isBookmarked. Ini berhasil karena allRecipes adalah MutableList
+        recipe?.isBookmarked = newStatus
     }
 }

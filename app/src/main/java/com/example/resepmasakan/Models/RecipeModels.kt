@@ -9,7 +9,8 @@ data class Resep(
     val bahan: List<String>,
     val caraMemasak: List<String>,
     val rating: Float,
-    val categoryId: Int
+    val categoryId: Int,
+    var isBookmarked: Boolean = false
 )
 
 data class Kategori(

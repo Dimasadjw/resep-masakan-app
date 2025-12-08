@@ -75,7 +75,7 @@ class AddRecipeActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
             // Contoh aksi setelah menyimpan:
-            // finish()
+//             finish()
         }
     }
 }
