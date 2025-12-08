@@ -1,16 +1,28 @@
 package com.example.resepmasakan.Activities
 
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
+// Import model dan repository yang diperlukan
 import com.example.resepmasakan.Models.Resep
 import com.example.resepmasakan.data.RecipeRepository
 import com.example.resepmasakan.R
-import com.example.resepmasakan.databinding.ActivityDescriptionBinding
 
 class RecipeDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDescriptionBinding
+    // Deklarasi View yang sesuai dengan ID XML yang baru
+    private lateinit var backButton: ImageButton
+    private lateinit var favoriteTitle: TextView
+    private lateinit var btnShare: ImageButton
+    private lateinit var imgFood: ImageView
+    private lateinit var txtNamaMakanan: TextView // ID BARU
+    private lateinit var txtDurasi: TextView      // ID BARU
+    private lateinit var txtRating: TextView      // ID BARU
+    private lateinit var icBookmark: ImageButton
+    private lateinit var txtAlatBahan: TextView   // ID BARU
+    private lateinit var txtLangkahMemasak: TextView // ID BARU
 
     companion object {
         const val EXTRA_RECIPE_ID = "extra_recipe_id"
@@ -18,68 +30,84 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Ganti R.layout.nama_file_xml_detail_resep Anda di sini
+        setContentView(R.layout.activity_description)
 
-        // Inisialisasi dan Set ContentView
-        binding = ActivityDescriptionBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // 1. Inisialisasi semua View menggunakan findViewById
 
-        // Ambil ID resep dari Intent
+        // Header Views
+        backButton = findViewById(R.id.back_button)
+        favoriteTitle = findViewById(R.id.favorite_title)
+        btnShare = findViewById(R.id.btnShare)
+
+        // Summary Views
+        imgFood = findViewById(R.id.imgFood)
+        txtNamaMakanan = findViewById(R.id.txtNamaMakanan) // Mengambil ID baru
+        txtDurasi = findViewById(R.id.txtDurasi)           // Mengambil ID baru
+        txtRating = findViewById(R.id.txtRating)           // Mengambil ID baru
+        icBookmark = findViewById(R.id.ic_bookmark)
+
+        // ScrollView Content Views
+        txtAlatBahan = findViewById(R.id.txtAlatBahan)       // Mengambil ID baru
+        txtLangkahMemasak = findViewById(R.id.txtLangkahMemasak) // Mengambil ID baru
+
+
+        // 2. Ambil ID resep dari Intent
         val recipeId = intent.getIntExtra(EXTRA_RECIPE_ID, -1)
 
         if (recipeId != -1) {
-            // Menggunakan fungsi findRecipeById dari Repository Anda
             val recipe = RecipeRepository.findRecipeById(recipeId)
             recipe?.let {
                 displayRecipeDetails(it)
             }
         }
 
-        // Set listener untuk tombol kembali
-        binding.headerLayout.backButton.setOnClickListener {
+        // 3. Set Listener
+        backButton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Set listener untuk tombol Share
-        binding.btnShare.setOnClickListener {
-            // TODO: Tambahkan Intent.ACTION_SEND
+        btnShare.setOnClickListener {
+            // TODO: Logika Share
         }
 
-        // Set listener untuk tombol Bookmark
-        binding.icBookmark.setOnClickListener {
-            // TODO: Tambahkan logika favorit
+        icBookmark.setOnClickListener {
+            // TODO: Logika Bookmark
         }
     }
 
     /**
      * Fungsi untuk menampilkan detail resep ke UI.
-     * Menggunakan properti Resep yang baru (alat, bahan, caraMemasak).
+     * Menggunakan properti Resep dan ID View yang baru.
      */
     private fun displayRecipeDetails(recipe: Resep) {
 
-        // Tampilkan nama makanan
-        binding.txtFoodName.text = recipe.nama
+        // Tampilkan data di bagian Summary Container
+        txtNamaMakanan.text = recipe.nama
+        favoriteTitle.text = recipe.nama // Mengisi judul header
 
-        // 2. Menyesuaikan teks deskripsi dengan properti yang tersedia di model Resep.
-        // Properti 'deskripsi' tidak ada di model Resep Anda, jadi kita gabungkan 'alat', 'bahan', dan 'caraMemasak'
-        val descriptionText = """
-            🕒 Durasi: ${recipe.infoDurasiPorsi}
-            ⭐ Rating: ${recipe.rating}
+        // Mengisi Durasi dan Porsi (Menggunakan string dari Repository)
+        txtDurasi.text = "Durasi: ${recipe.infoDurasiPorsi.split("|")[0].trim()}"
 
-            ## 🔪 Alat dan Bahan
-            ${recipe.alat.joinToString(separator = "\n* ", prefix = "* ")}
+        // Mengisi Rating
+        txtRating.text = "⭐ Rating: ${recipe.rating}"
 
-            ---
+        // Mengatur Gambar Makanan
+        imgFood.setImageResource(recipe.idGambar)
 
-            ## 👨‍🍳 Cara Memasak
-            ${recipe.caraMemasak.mapIndexed { index, step -> "${index + 1}. $step" }.joinToString(separator = "\n")}
-        """.trimIndent()
+        // 4. Mengisi Alat dan Bahan (txtAlatBahan)
+        // Menggabungkan Alat dan Bahan menjadi satu string berformat
+        val alatBahanText = "ALAT:\n* ${recipe.alat.joinToString(separator = "\n* ")}\n\n" +
+                "BAHAN:\n* ${recipe.bahan.joinToString(separator = "\n* ")}"
 
-        binding.scrollDesc.txtDescription.text = descriptionText
+        txtAlatBahan.text = alatBahanText
 
-        // Perbarui Judul Header
-        binding.headerLayout.favoriteTitle.text = recipe.nama
+        // 5. Mengisi Langkah Memasak (txtLangkahMemasak)
+        // Memformat daftar langkah menjadi string bernomor
+        val langkahMemasakText = recipe.caraMemasak
+            .mapIndexed { index, step -> "${index + 1}. $step" }
+            .joinToString(separator = "\n")
 
-        // TODO: Atur image (Gunakan library seperti Glide/Coil untuk memuat R.drawable.idGambar)
-        binding.imgFood.setImageResource(recipe.idGambar)
+        txtLangkahMemasak.text = langkahMemasakText
     }
 }
