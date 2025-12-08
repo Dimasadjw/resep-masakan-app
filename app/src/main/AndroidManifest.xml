@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ResepMasakan"
         tools:targetApi="31">
+
         <activity
             android:name=".Activities.LoginActivity"
             android:exported="true">
@@ -24,6 +25,13 @@
             android:name=".MainActivity"
             android:exported="true">
         </activity>
-    </application>
 
+        <activity
+            android:name=".Activities.RecipeDetailActivity"
+            android:exported="false" />
+
+<!--        <activity-->
+<!--            android:name=".Activities.CategoryResultActivity"-->
+<!--            android:exported="false" />-->
+    </application>
 </manifest>

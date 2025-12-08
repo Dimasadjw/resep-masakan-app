@@ -5,7 +5,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-// Import model dan repository yang diperlukan
+import androidx.core.text.HtmlCompat
 import com.example.resepmasakan.Models.Resep
 import com.example.resepmasakan.data.RecipeRepository
 import com.example.resepmasakan.R
@@ -82,32 +82,40 @@ class RecipeDetailActivity : AppCompatActivity() {
      */
     private fun displayRecipeDetails(recipe: Resep) {
 
-        // Tampilkan data di bagian Summary Container
         txtNamaMakanan.text = recipe.nama
-        favoriteTitle.text = recipe.nama // Mengisi judul header
+        favoriteTitle.text = recipe.nama
 
-        // Mengisi Durasi dan Porsi (Menggunakan string dari Repository)
-        txtDurasi.text = "Durasi: ${recipe.infoDurasiPorsi.split("|")[0].trim()}"
+        val parts = recipe.infoDurasiPorsi.split("|")
+        txtDurasi.text = "🕒 Durasi: ${parts.getOrNull(0)?.trim() ?: recipe.infoDurasiPorsi}"
 
-        // Mengisi Rating
         txtRating.text = "⭐ Rating: ${recipe.rating}"
-
-        // Mengatur Gambar Makanan
         imgFood.setImageResource(recipe.idGambar)
 
         // 4. Mengisi Alat dan Bahan (txtAlatBahan)
-        // Menggabungkan Alat dan Bahan menjadi satu string berformat
-        val alatBahanText = "ALAT:\n* ${recipe.alat.joinToString(separator = "\n* ")}\n\n" +
-                "BAHAN:\n* ${recipe.bahan.joinToString(separator = "\n* ")}"
+        val htmlAlat = recipe.alat
+            .joinToString(separator = "") { "<li>${it.trim()}</li>" }
 
-        txtAlatBahan.text = alatBahanText
+        val htmlBahan = recipe.bahan
+            .joinToString(separator = "") { "<li>${it.trim()}</li>" }
 
-        // 5. Mengisi Langkah Memasak (txtLangkahMemasak)
-        // Memformat daftar langkah menjadi string bernomor
-        val langkahMemasakText = recipe.caraMemasak
-            .mapIndexed { index, step -> "${index + 1}. $step" }
-            .joinToString(separator = "\n")
+        val alatBahanHtml = """
+            <b>ALAT:</b>
+            <ul>$htmlAlat</ul>
+            <br>
+            <b>BAHAN:</b>
+            <ul>$htmlBahan</ul>
+        """.trimIndent()
 
-        txtLangkahMemasak.text = langkahMemasakText
+        // Menggunakan HtmlCompat untuk menampilkan HTML di TextView
+        txtAlatBahan.text = HtmlCompat.fromHtml(alatBahanHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+        val langkahHtml = recipe.caraMemasak
+            .joinToString(separator = "") { "<li>${it.trim()}</li>" }
+
+        val langkahMemasakHtml = """
+            <ol>$langkahHtml</ol>
+        """.trimIndent()
+
+        txtLangkahMemasak.text = HtmlCompat.fromHtml(langkahMemasakHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }

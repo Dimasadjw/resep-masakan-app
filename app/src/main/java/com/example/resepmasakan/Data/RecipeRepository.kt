@@ -13,7 +13,7 @@ object RecipeRepository {
             Kategori(id = 1, nama = "Nasi & Mie", idIcon = R.drawable.img_mie_dan_nasi),
             Kategori(id = 2, nama = "Daging Sapi & Kambing", idIcon = R.drawable.img_daging),
             Kategori(id = 3, nama = "Ayam", idIcon = R.drawable.img_ayam),
-            Kategori(id = 4, nama = "Makanan Laut (Seafood)", idIcon = R.drawable.img_seafood),
+            Kategori(id = 4, nama = "Seafood", idIcon = R.drawable.img_seafood),
             Kategori(id = 5, nama = "Sayuran & Tumisan", idIcon = R.drawable.img_sayur)
         )
     }

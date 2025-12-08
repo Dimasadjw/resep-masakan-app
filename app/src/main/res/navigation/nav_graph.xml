@@ -29,4 +29,7 @@
             android:defaultValue="user@example.com" />
     </fragment>
 
+    <action android:id="@+id/action_global_nav_profile"
+            app:destination="@id/nav_profile" />
+
 </navigation>

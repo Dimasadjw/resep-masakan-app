@@ -14,9 +14,9 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:cardCornerRadius="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="30dp"
         app:cardElevation="0dp"
         app:cardBackgroundColor="@android:color/transparent">
 
@@ -37,7 +37,7 @@
         android:textColor="@android:color/black"
         android:layout_marginTop="6dp"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Chinese Food" />
