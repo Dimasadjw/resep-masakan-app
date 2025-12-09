@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.resepmasakan.R
 
 class AddRecipeActivity : AppCompatActivity() {
-
-    // Deklarasi properti UI
     private lateinit var etNamaResep: EditText
     private lateinit var etAlatBahan: EditText
     private lateinit var etCaraMasak: EditText

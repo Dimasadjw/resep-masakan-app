@@ -12,7 +12,6 @@ data class Resep(
     val categoryId: Int,
     var isBookmarked: Boolean = false
 )
-
 data class Kategori(
     val id: Int,
     val nama: String,
