@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView // Import TextView yang dibutuhkan
+import android.widget.TextView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.resepmasakan.R // Import R class untuk ID resource
+import com.example.resepmasakan.R
 
 /**
- * ProfileFragment adalah layar yang tugasnya menampilkan info profil pengguna.
+ * ProfileFragment adalah layar yang tugasnya menampilkan info profil pengguna, termasuk deskripsi.
  */
 class ProfileFragment : Fragment() {
-
-    // 1. Hapus semua deklarasi View Binding
 
     // Menggunakan navArgs untuk mendeklarasikan Argumen
     private val args: ProfileFragmentArgs by navArgs()
@@ -22,9 +21,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { // Kembalikan ke View? karena ini adalah cara tradisional
-
-        // 2. INFLATE LAYOUT MENGGUNAKAN CARA TRADISIONAL
+    ): View? {
         val tampilan = inflater.inflate(R.layout.activity_profile, container, false)
         return tampilan
     }
@@ -35,16 +32,25 @@ class ProfileFragment : Fragment() {
         val emailLengkap = args.emailPengguna
         val namaPengguna = emailLengkap.split("@").first()
 
-        // 3. AKSES VIEW MENGGUNAKAN findViewById()
-        // Pastikan Anda menggunakan ID View yang benar dari activity_profile.xml
+        // ⭐ Data untuk Deskripsi (Contoh hardcoded)
+        val deskripsiPengguna = "Saya seorang koki amatir yang bersemangat mencari resep masakan Indonesia dan Barat terbaik."
+
+        // AKSES VIEWS
         val textViewUntukNama: TextView = tampilan.findViewById(R.id.textViewNamaPengguna)
         val textViewUntukEmail: TextView = tampilan.findViewById(R.id.textViewEmailPengguna)
+        val imageViewFotoProfil: ImageView = tampilan.findViewById(R.id.profileImage)
 
-        // 4. Tampilkan data
+        // ⭐ AKSES TextView Deskripsi yang Baru
+        val textViewDeskripsi: TextView = tampilan.findViewById(R.id.textViewDeskripsi)
+
+        // Tampilkan data ke TextViews
         textViewUntukNama.text = namaPengguna
         textViewUntukEmail.text = emailLengkap
-    }
 
-    // 5. Hapus onDestroyView karena tidak ada binding yang perlu dibersihkan
-    // Kode ini sudah bersih tanpa menggunakan View Binding
+        // ⭐ Tampilkan Deskripsi
+        textViewDeskripsi.text = deskripsiPengguna
+
+        // Set gambar profil
+        imageViewFotoProfil.setImageResource(R.drawable.bahlil)
+    }
 }
