@@ -31,5 +31,8 @@
         <activity
             android:name=".Activities.CategoryResultActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activities.AddRecipeActivity"
+            android:exported="false" />
     </application>
 </manifest>

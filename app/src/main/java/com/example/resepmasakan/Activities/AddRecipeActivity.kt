@@ -64,7 +64,7 @@ class AddRecipeActivity : AppCompatActivity() {
 
             // Validasi input
             if (recipeName.isEmpty() || ingredientsAndTools.isEmpty() || cookingInstructions.isEmpty()) {
-                Toast.makeText(this, "Mohon lengkapi semua bidang input resep.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Mohon isi semua datanya", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
