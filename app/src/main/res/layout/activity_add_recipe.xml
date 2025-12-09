@@ -8,8 +8,8 @@
     <!-- Tombol Back -->
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:src="@drawable/ic_arrow_back"
@@ -22,10 +22,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RESEP"
+        android:text="TAMBAH RESEP"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="parent"

@@ -25,13 +25,11 @@
             android:name=".MainActivity"
             android:exported="true">
         </activity>
-
         <activity
             android:name=".Activities.RecipeDetailActivity"
             android:exported="false" />
-
-<!--        <activity-->
-<!--            android:name=".Activities.CategoryResultActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".Activities.CategoryResultActivity"
+            android:exported="false" />
     </application>
 </manifest>

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.resepmasakan.Activities.CategoryResultActivity
 import com.example.resepmasakan.Activities.RecipeDetailActivity // Import Activity Tujuan
 import com.example.resepmasakan.Models.Kategori
 import com.example.resepmasakan.Models.Resep
@@ -45,9 +46,16 @@ class HomeFragment : Fragment() {
 
     private fun tampilkanKategori(dataKategori: List<Kategori>) {
 
-        // AKSI KLIK KATEGORI: Masih menggunakan Toast (Karena biasanya mengarah ke Fragment lain)
+        // AKSI KLIK KATEGORI: Ganti Toast dengan Intent ke CategoryResultActivity
         val adapterUntukKategori = KategoriAdapter(dataKategori) { kategori ->
-            Toast.makeText(requireContext(), "Menuju Filter Kategori: ${kategori.nama}", Toast.LENGTH_SHORT).show()
+
+            // 🎯 Mulai CategoryResultActivity 🎯
+            val intent = Intent(requireContext(), CategoryResultActivity::class.java)
+
+            // Mengirim ID Kategori yang diklik
+            intent.putExtra(CategoryResultActivity.EXTRA_CATEGORY_ID, kategori.id)
+
+            startActivity(intent)
         }
 
         rvKategori.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

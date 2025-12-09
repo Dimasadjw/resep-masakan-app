@@ -1,5 +1,6 @@
 package com.example.resepmasakan.Fragments
 
+import android.content.Intent // Wajib diimpor untuk navigasi ke Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.resepmasakan.R
 import com.example.resepmasakan.Models.Resep
+import com.example.resepmasakan.Activities.RecipeDetailActivity // Wajib diimpor
 import com.example.resepmasakan.adapters.ResepAdapter
 import com.example.resepmasakan.data.RecipeRepository
 
@@ -39,23 +41,22 @@ class FavoriteFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        // --- Langkah 2: Ambil Data Favorit Statis ---
-        // Memanggil getFavoriteResep() dari Repository untuk mendapatkan 5 resep pilihan (statik).
+        // --- Langkah 2 & 3: Ambil Data Favorit dan Inisialisasi RecyclerView ---
         val dataResepFavorit: List<Resep> = RecipeRepository.getFavoriteResep()
-
-        // --- Langkah 3: Inisialisasi RecyclerView ---
-        // Pastikan ID di XML adalah "recycler_view_favorites".
         rvFavorites = tampilan.findViewById(R.id.recycler_view_favorites)
 
         if (dataResepFavorit.isEmpty()) {
-            // Tampilkan pesan jika daftar kosong (Meskipun harusnya tidak jika Repository sudah diisi)
             Toast.makeText(requireContext(), "Daftar Resep Pilihan Kosong.", Toast.LENGTH_LONG).show()
         }
 
-        // --- Langkah 4: Atur Adapter ---
+        // --- Langkah 4: Atur Adapter dan Navigasi Intent ---
         val adapterUntukFavorit = ResepAdapter(dataResepFavorit) { resep ->
-            // Aksi Klik Item
-            Toast.makeText(requireContext(), "Membuka Detail Resep: ${resep.nama}", Toast.LENGTH_SHORT).show()
+            // 🎯 KOREKSI: Ganti Toast dengan Intent ke Detail Activity 🎯
+
+            val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
+            // Kirim ID Resep menggunakan kunci yang didefinisikan di RecipeDetailActivity
+            intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_ID, resep.id)
+            startActivity(intent)
         }
 
         // Atur LayoutManager (Vertikal)
