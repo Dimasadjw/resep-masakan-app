@@ -1,5 +1,6 @@
 package com.example.resepmasakan.Activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -79,8 +80,42 @@ class RecipeDetailActivity : AppCompatActivity() {
         }
 
         btnShare.setOnClickListener {
-            Toast.makeText(this, "Fungsi Share...", Toast.LENGTH_SHORT).show()
+            currentRecipe?.let { recipe ->
+
+                // ====== Format teks untuk dibagikan ======
+                val shareText = buildString {
+                    append("🍽 *${recipe.nama}*\n")
+                    append("⭐ Rating: ${recipe.rating}\n")
+                    append("\n⏱ Durasi: ${recipe.infoDurasiPorsi.split("|")[0].trim()}\n\n")
+
+                    append(" *Alat Masak*\n")
+                    recipe.alat.forEach { alat ->
+                        append("• $alat\n")
+                    }
+
+                    append("\n *Bahan Masakan*\n")
+                    recipe.bahan.forEach { bahan ->
+                        append("• $bahan\n")
+                    }
+
+                    append("\n *Langkah Memasak*\n")
+                    recipe.caraMemasak.forEachIndexed { index, langkah ->
+                        append("${index + 1}. $langkah\n")
+                    }
+                }
+
+                // ====== Intent untuk Share ======
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_SUBJECT, "Resep ${recipe.nama}")
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                }
+
+                // Menampilkan pilihan aplikasi share
+                startActivity(Intent.createChooser(intent, "Bagikan Resep Melalui"))
+            }
         }
+
 
         // --- IMPLEMENTASI LOGIKA TOMBOL BOOKMARK ---
         icBookmark.setOnClickListener {

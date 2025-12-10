@@ -88,7 +88,7 @@
         android:layout_height="40dp"
         android:text="Tambah"
         android:textColor="#000000"
-        android:background="@drawable/bg_button"
+        android:backgroundTint="#FFC107"
         app:layout_constraintTop_toBottomOf="@id/etCaraMasak"
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
